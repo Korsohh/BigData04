@@ -1,24 +1,24 @@
 import pandas as pd
 
-#carga y inspección de datos
+#carga y inspección de datos (benjamin diaz)
 
 
-#diagnostico de calidad
+#diagnostico de calidad (nadie aun)
 
 
-#limpieza y preparacion
+#limpieza y preparacion (fernando)
 
 
-#estadistica descriptiva
+#estadistica descriptiva (joaquin)
 
 
-#relacion entre variables
+#relacion entre variables (nadie aun)
 
 
-#visualizacion de datos
+#visualizacion de datos (claudio)
+
+    
+#exportacion (nadie)
 
 
-#exportacion
-
-
-#reproducibilidad 
+#reproducibilidad (nadie)
