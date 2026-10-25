@@ -1,0 +1,71 @@
+Variable,Categoria,Frecuencia,Porcentaje
+country,India,4265,8.53
+country,Brazil,4215,8.43
+country,Canada,4203,8.41
+country,Mexico,4196,8.39
+country,Indonesia,4172,8.34
+country,Germany,4160,8.32
+country,Spain,4149,8.3
+country,UK,4147,8.29
+country,Italy,4142,8.28
+country,France,4137,8.27
+country,Australia,4114,8.23
+country,USA,4100,8.2
+subscription_type,Free,22525,45.05
+subscription_type,Premium Individual,14029,28.06
+subscription_type,Student,4516,9.03
+subscription_type,Premium Family,4482,8.96
+subscription_type,Premium Duo,4448,8.9
+subscription_status,Active,42109,84.22
+subscription_status,Inactive,7891,15.78
+inactive_3_months_flag,0,38877,77.75
+inactive_3_months_flag,1,11123,22.25
+ad_interaction,No,32514,65.03
+ad_interaction,Yes,17486,34.97
+ad_conversion_to_subscription,No,45648,91.3
+ad_conversion_to_subscription,Yes,4352,8.7
+favorite_genre,Classical,4272,8.54
+favorite_genre,Bollywood,4246,8.49
+favorite_genre,K-Pop,4228,8.46
+favorite_genre,Latin,4203,8.41
+favorite_genre,Indie,4182,8.36
+favorite_genre,Electronic,4144,8.29
+favorite_genre,Country,4135,8.27
+favorite_genre,Jazz,4134,8.27
+favorite_genre,Hip-Hop,4125,8.25
+favorite_genre,Rock,4120,8.24
+favorite_genre,R&B,4114,8.23
+favorite_genre,Pop,4097,8.19
+most_liked_feature,Lyrics,6358,12.72
+most_liked_feature,Radio,6271,12.54
+most_liked_feature,Offline Mode,6242,12.48
+most_liked_feature,Discover Weekly,6240,12.48
+most_liked_feature,Playlists,6238,12.48
+most_liked_feature,Daily Mix,6236,12.47
+most_liked_feature,Podcasts,6216,12.43
+most_liked_feature,AI DJ,6199,12.4
+desired_future_feature,Mood-based Auto Playlists,8419,16.84
+desired_future_feature,Concert Alerts,8403,16.81
+desired_future_feature,Social Listening,8369,16.74
+desired_future_feature,Better AI Recommendations,8335,16.67
+desired_future_feature,Lyrics Translation,8243,16.49
+desired_future_feature,HiFi Audio,8231,16.46
+primary_device,Smart Speaker,10050,20.1
+primary_device,Car System,10044,20.09
+primary_device,Desktop,10037,20.07
+primary_device,Mobile,9937,19.87
+primary_device,Tablet,9932,19.86
+music_suggestion_rating_1_to_5,4,17416,34.83
+music_suggestion_rating_1_to_5,5,12517,25.03
+music_suggestion_rating_1_to_5,3,12377,24.75
+music_suggestion_rating_1_to_5,2,5135,10.27
+music_suggestion_rating_1_to_5,1,2555,5.11
+signup_year,2020,6283,12.57
+signup_year,2025,6166,12.33
+signup_year,2019,6161,12.32
+signup_year,2023,6153,12.31
+signup_year,2024,6077,12.15
+signup_year,2022,6045,12.09
+signup_year,2018,6045,12.09
+signup_year,2021,6010,12.02
+signup_year,2026,1060,2.12

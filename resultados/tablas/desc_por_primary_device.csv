@@ -1,0 +1,31 @@
+Grupo,Categoria,Variable,N_validos,Media,Mediana,Desv_Est
+primary_device,Car System,age,10044,38.126,38.0,13.065
+primary_device,Car System,months_inactive,10044,1.537,1.0,1.936
+primary_device,Car System,music_suggestion_rating_1_to_5,10044,3.64,4.0,1.115
+primary_device,Car System,avg_listening_hours_per_week,10044,9.977,9.96,3.975
+primary_device,Car System,playlists_created,10044,7.99,8.0,2.819
+primary_device,Car System,avg_skips_per_day,10044,9.99,10.0,3.182
+primary_device,Desktop,age,10037,37.801,38.0,13.035
+primary_device,Desktop,months_inactive,10037,1.525,1.0,1.978
+primary_device,Desktop,music_suggestion_rating_1_to_5,10037,3.647,4.0,1.108
+primary_device,Desktop,avg_listening_hours_per_week,10037,10.047,10.05,3.936
+primary_device,Desktop,playlists_created,10037,7.999,8.0,2.844
+primary_device,Desktop,avg_skips_per_day,10037,10.078,10.0,3.156
+primary_device,Mobile,age,9937,37.961,38.0,12.947
+primary_device,Mobile,months_inactive,9937,1.556,1.0,1.963
+primary_device,Mobile,music_suggestion_rating_1_to_5,9937,3.632,4.0,1.118
+primary_device,Mobile,avg_listening_hours_per_week,9937,9.997,9.98,3.937
+primary_device,Mobile,playlists_created,9937,7.989,8.0,2.825
+primary_device,Mobile,avg_skips_per_day,9937,10.093,10.0,3.174
+primary_device,Smart Speaker,age,10050,38.087,38.0,12.974
+primary_device,Smart Speaker,months_inactive,10050,1.527,1.0,1.923
+primary_device,Smart Speaker,music_suggestion_rating_1_to_5,10050,3.664,4.0,1.109
+primary_device,Smart Speaker,avg_listening_hours_per_week,10050,9.918,9.93,3.966
+primary_device,Smart Speaker,playlists_created,10050,8.007,8.0,2.841
+primary_device,Smart Speaker,avg_skips_per_day,10050,9.986,10.0,3.147
+primary_device,Tablet,age,9932,38.077,38.0,12.901
+primary_device,Tablet,months_inactive,9932,1.52,1.0,1.961
+primary_device,Tablet,music_suggestion_rating_1_to_5,9932,3.638,4.0,1.121
+primary_device,Tablet,avg_listening_hours_per_week,9932,10.007,9.99,4.031
+primary_device,Tablet,playlists_created,9932,8.028,8.0,2.829
+primary_device,Tablet,avg_skips_per_day,9932,9.983,10.0,3.168

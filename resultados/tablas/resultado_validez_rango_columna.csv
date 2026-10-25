@@ -1,0 +1,5 @@
+Regla,Filas_Incumplen,Porcentaje_%
+inactive_3_months_flag no coincide con months_inactive >= 3,0,0.0
+subscription_status Inactive con months_inactive < 3,0,0.0
+Conversión a suscripción sin interacción con anuncios,0,0.0
+Plan Free con conversión a suscripción,1921,3.84

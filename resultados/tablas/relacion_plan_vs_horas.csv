@@ -1,0 +1,6 @@
+subscription_type,n_usuarios,media_horas,mediana_horas,desv_horas
+Free,22525,10.02,9.98,3.99
+Premium Duo,4448,9.96,10.02,3.97
+Premium Family,4482,9.96,9.98,3.98
+Premium Individual,14029,9.97,9.97,3.95
+Student,4516,9.95,10.04,3.91

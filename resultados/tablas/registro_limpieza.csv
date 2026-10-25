@@ -1,0 +1,22 @@
+paso,accion,filas_antes,filas_despues,filas_afectadas,justificacion
+0. Entrada,Datos recibidos,50000,50000,0,Minimo de 50.000 validado antes de limpiar.
+1. Tipos,"Quitar espacios, placeholders a nulo y signup_date a fecha",50000,50000,0,Placeholders y fechas no convertibles quedan nulos y se tratan en el paso 3.
+2. Duplicados,Eliminar filas identicas,50000,50000,0,user_id repetido con datos distintos: 0 (se conservan).
+3. Nulos,Eliminar filas con nulo en columna clave,50000,50000,0,Sin esas columnas la fila no sirve para el analisis.
+4. Rangos,"Eliminar age fuera de [13, 100]",50000,50000,0,Valor imposible o implausible.
+4. Rangos,"Eliminar months_inactive fuera de [0, 120]",50000,50000,0,Valor imposible o implausible.
+4. Rangos,"Eliminar inactive_3_months_flag fuera de [0, 1]",50000,50000,0,Valor imposible o implausible.
+4. Rangos,"Eliminar music_suggestion_rating_1_to_5 fuera de [1, 5]",50000,50000,0,Valor imposible o implausible.
+4. Rangos,"Eliminar avg_listening_hours_per_week fuera de [0, 168]",50000,50000,0,Valor imposible o implausible.
+4. Rangos,"Eliminar playlists_created fuera de [0, 1000]",50000,50000,0,Valor imposible o implausible.
+4. Rangos,"Eliminar avg_skips_per_day fuera de [0, 500]",50000,50000,0,Valor imposible o implausible.
+4. Rangos,"Eliminar subscription_status fuera de ['Active', 'Inactive']",50000,50000,0,Categoria no permitida.
+4. Rangos,"Eliminar ad_interaction fuera de ['No', 'Yes']",50000,50000,0,Categoria no permitida.
+4. Rangos,"Eliminar ad_conversion_to_subscription fuera de ['No', 'Yes']",50000,50000,0,Categoria no permitida.
+5. Coherencia,Recalcular inactive_3_months_flag,50000,50000,0,"Se deriva de months_inactive, la medida mas detallada."
+5. Coherencia,Marcar 'Active' con months_inactive >= 3,50000,50000,3232,Puede seguir pagando sin escuchar: se conserva con advertencia.
+6. Extremos,Marcar extremos IQR en avg_listening_hours_per_week,50000,50000,166,Observaciones plausibles: se conservan y se marcan.
+6. Extremos,Marcar extremos IQR en playlists_created,50000,50000,185,Observaciones plausibles: se conservan y se marcan.
+6. Extremos,Marcar extremos IQR en avg_skips_per_day,50000,50000,413,Observaciones plausibles: se conservan y se marcan.
+6. Extremos,Marcar extremos IQR en months_inactive,50000,50000,2417,Observaciones plausibles: se conservan y se marcan.
+7. Derivadas,"Crear anio_registro, antiguedad_meses, grupo_edad, grupo_plan",50000,50000,50000,Antiguedad medida hasta 2026-03-01 (ultimo registro).

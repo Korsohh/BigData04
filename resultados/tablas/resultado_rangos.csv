@@ -1,0 +1,12 @@
+Columna,Regla,Fuera_Rango,Fuera_Rango_%,Min_Observado,Max_Observado,Atipicos_2std
+age,"[13, 100]",0,0.0,16,60,0.0
+months_inactive,"[0, 120]",0,0.0,0,18,2417.0
+inactive_3_months_flag,"[0, 1]",0,0.0,0,1,0.0
+music_suggestion_rating_1_to_5,"[1, 5]",0,0.0,1,5,2555.0
+avg_listening_hours_per_week,"[0, 168]",0,0.0,0.0,26.25,2331.0
+playlists_created,"[0, 1000]",0,0.0,0,23,2462.0
+avg_skips_per_day,"[0, 500]",0,0.0,1,25,1923.0
+signup_date,"[2008-10-07, 2026-10-25]",0,0.0,2018-01-01 00:00:00,2026-03-01 00:00:00,
+subscription_status,"{Active, Inactive}",0,0.0,,,
+ad_interaction,"{No, Yes}",0,0.0,,,
+ad_conversion_to_subscription,"{No, Yes}",0,0.0,,,

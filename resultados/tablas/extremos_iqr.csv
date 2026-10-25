@@ -1,0 +1,5 @@
+variable,limite_inferior,limite_superior,n_extremos,porcentaje
+avg_listening_hours_per_week,-0.8199999999999994,20.78,166,0.33
+playlists_created,0.0,16.0,185,0.37
+avg_skips_per_day,2.0,18.0,413,0.83
+months_inactive,-3.0,5.0,2417,4.83

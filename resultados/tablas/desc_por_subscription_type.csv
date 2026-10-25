@@ -1,0 +1,31 @@
+Grupo,Categoria,Variable,N_validos,Media,Mediana,Desv_Est
+subscription_type,Free,age,22525,38.029,38.0,12.981
+subscription_type,Free,months_inactive,22525,1.522,1.0,1.953
+subscription_type,Free,music_suggestion_rating_1_to_5,22525,3.643,4.0,1.119
+subscription_type,Free,avg_listening_hours_per_week,22525,10.018,9.98,3.99
+subscription_type,Free,playlists_created,22525,7.99,8.0,2.839
+subscription_type,Free,avg_skips_per_day,22525,10.04,10.0,3.164
+subscription_type,Premium Duo,age,4448,38.039,38.0,12.984
+subscription_type,Premium Duo,months_inactive,4448,1.554,1.0,1.969
+subscription_type,Premium Duo,music_suggestion_rating_1_to_5,4448,3.63,4.0,1.125
+subscription_type,Premium Duo,avg_listening_hours_per_week,4448,9.959,10.02,3.966
+subscription_type,Premium Duo,playlists_created,4448,7.951,8.0,2.786
+subscription_type,Premium Duo,avg_skips_per_day,4448,10.067,10.0,3.155
+subscription_type,Premium Family,age,4482,37.827,38.0,13.075
+subscription_type,Premium Family,months_inactive,4482,1.556,1.0,1.948
+subscription_type,Premium Family,music_suggestion_rating_1_to_5,4482,3.622,4.0,1.11
+subscription_type,Premium Family,avg_listening_hours_per_week,4482,9.963,9.98,3.976
+subscription_type,Premium Family,playlists_created,4482,8.027,8.0,2.823
+subscription_type,Premium Family,avg_skips_per_day,4482,10.006,10.0,3.215
+subscription_type,Premium Individual,age,14029,38.084,38.0,12.938
+subscription_type,Premium Individual,months_inactive,14029,1.533,1.0,1.933
+subscription_type,Premium Individual,music_suggestion_rating_1_to_5,14029,3.653,4.0,1.106
+subscription_type,Premium Individual,avg_listening_hours_per_week,14029,9.973,9.97,3.954
+subscription_type,Premium Individual,playlists_created,14029,8.028,8.0,2.823
+subscription_type,Premium Individual,avg_skips_per_day,14029,10.002,10.0,3.16
+subscription_type,Student,age,4516,37.841,38.0,13.063
+subscription_type,Student,months_inactive,4516,1.541,1.0,1.996
+subscription_type,Student,music_suggestion_rating_1_to_5,4516,3.66,4.0,1.112
+subscription_type,Student,avg_listening_hours_per_week,4516,9.952,10.04,3.909
+subscription_type,Student,playlists_created,4516,8.013,8.0,2.874
+subscription_type,Student,avg_skips_per_day,4516,10.011,10.0,3.155

@@ -1,0 +1,13 @@
+Grupo,Categoria,Variable,N_validos,Media,Mediana,Desv_Est
+subscription_status,Active,age,42109,38.005,38.0,12.992
+subscription_status,Active,months_inactive,42109,0.979,1.0,1.382
+subscription_status,Active,music_suggestion_rating_1_to_5,42109,3.646,4.0,1.115
+subscription_status,Active,avg_listening_hours_per_week,42109,9.987,9.98,3.958
+subscription_status,Active,playlists_created,42109,7.993,8.0,2.823
+subscription_status,Active,avg_skips_per_day,42109,10.022,10.0,3.161
+subscription_status,Inactive,age,7891,38.038,38.0,12.946
+subscription_status,Inactive,months_inactive,7891,4.49,4.0,1.89
+subscription_status,Inactive,music_suggestion_rating_1_to_5,7891,3.634,4.0,1.112
+subscription_status,Inactive,avg_listening_hours_per_week,7891,9.999,9.94,4.025
+subscription_status,Inactive,playlists_created,7891,8.054,8.0,2.875
+subscription_status,Inactive,avg_skips_per_day,7891,10.047,10.0,3.192

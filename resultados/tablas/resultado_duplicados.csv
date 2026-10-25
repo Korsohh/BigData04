@@ -1,0 +1,4 @@
+Tipo_Repeticion,Filas_Afectadas,Porcentaje_%,Clasificacion
+Duplicado,0,0.0,Dato inválido: Se debería eliminar
+Mismo user_id con datos distintos,0,0.0,Repeticion válida: Revisar
+"Mismos datos, distinto user_id",0,0.0,Repeticion válida: Distintos ID's

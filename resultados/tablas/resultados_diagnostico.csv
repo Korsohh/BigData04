@@ -1,0 +1,11 @@
+Index,Valor
+Filas,50000
+Columnas,18
+Columnas con datos faltantes,0
+Celdas faltantes (nulos y placeholders),0
+Duplicado exactos,0
+"Filas mismo ID, distintos datos",0
+"Mismos datos, distinto ID",0
+Columnas con tipo erróneo,0
+Datos fuera de rango,0
+Datos fuera del rango de la columna,1921

@@ -779,8 +779,68 @@ def relacion_entre_variables(df: pd.DataFrame) -> dict:
 resultados_relaciones = relacion_entre_variables(df_limpio)
 
 
-# VISUALIZACIÓN DE DATOS (claudio)
+# VISUALIZACIÓN DE DATOS
+import matplotlib.pyplot as plt
 
+print("--- Iniciando visualización de datos ---")
+
+DIR_FIGURAS = BASE_DIR / "resultados" / "figuras"
+DIR_FIGURAS.mkdir(parents=True, exist_ok=True)
+
+def guardar_figura(nombre):
+  plt.tight_layout()
+  plt.savefig(DIR_FIGURAS / f"{nombre}.png", dpi=150)
+  plt.close()
+
+horas = "avg_listening_hours_per_week"
+
+#1 Distribución de una variable numérica
+plt.figure(figsize=(7, 4))
+plt.hist(df_limpio[horas], bins=40, color="green", edgecolor="white")
+plt.title("Distribución de horas de escucha semanales")
+plt.xlabel("Horas por semana")
+plt.ylabel("Cantidad de usuarios")
+guardar_figura("01_distribucion_horas")
+
+#2 Valores extremos y dispersión por grupos (boxplot)
+plt.figure(figsize=(7, 4))
+grupos = sorted(df_limpio["grupo_plan"].unique())
+plt.boxplot([df_limpio.loc[df_limpio["grupo_plan"] == g, horas] for g in grupos], tick_labels=grupos)
+plt.title("Horas de escucha semanales por grupo de plan")
+plt.xlabel("Grupo de plan")
+plt.ylabel("Horas por semana")
+guardar_figura("02_boxplot")
+
+#3 Frecuencias de categorías
+frec = df_limpio["subscription_type"].value_counts(normalize=True) * 100
+plt.figure(figsize=(7, 4))
+plt.bar(frec.index, frec.values, color="green")
+plt.title("Usuarios según tipo de suscripción")
+plt.xlabel("Tipo de suscripción")
+plt.ylabel("Porcentaje de usuarios (%)")
+plt.xticks(rotation=20)
+guardar_figura("03_frecuencia_suscripcion")
+
+#4 Dispersión de dos variables 
+muestra = df_limpio.sample(5000, random_state=321)
+plt.figure(figsize=(7, 4))
+plt.scatter(muestra[horas], muestra["avg_skips_per_day"], s=5, alpha=0.4)
+plt.title("Horas de escucha vs saltos de canción por día (muestra de 5.000)")
+plt.xlabel("Horas por semana")
+plt.ylabel("Saltos promedio por día")
+guardar_figura("04_dispersion_horas")
+
+#5 Pregunta del equipo: cantidad de registros por año
+registros = df_limpio["anio_registro"].value_counts().sort_index()
+plt.figure(figsize=(7, 4))
+plt.plot(registros.index, registros.values, marker="o", label="Usuarios registrados")
+plt.title("Usuarios registrados por año (2026 es un año incompleto)")
+plt.xlabel("Año de registro")
+plt.ylabel("Cantidad de usuarios")
+plt.legend()
+guardar_figura("05_registros_por_año")
+
+print("--- Visualización de datos completada (imagenes creadas en", DIR_FIGURAS, ") ---\n")
 
 # EXPORTACIÓN
 DIR_DATOS = BASE_DIR / "datos"

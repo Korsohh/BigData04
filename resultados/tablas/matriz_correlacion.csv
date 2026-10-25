@@ -1,0 +1,7 @@
+,age,months_inactive,music_suggestion_rating_1_to_5,avg_listening_hours_per_week,playlists_created,avg_skips_per_day
+age,1.0,0.0012,0.0042,-0.0023,0.0014,-0.0046
+months_inactive,0.0012,1.0,-0.006,0.0007,0.0059,0.0069
+music_suggestion_rating_1_to_5,0.0042,-0.006,1.0,0.0003,0.0,0.0051
+avg_listening_hours_per_week,-0.0023,0.0007,0.0003,1.0,0.0016,0.0069
+playlists_created,0.0014,0.0059,0.0,0.0016,1.0,-0.0062
+avg_skips_per_day,-0.0046,0.0069,0.0051,0.0069,-0.0062,1.0
