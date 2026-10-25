@@ -616,13 +616,134 @@ resultados_calidad = diagnostico_calidad(df)
 # ESTADÍSTICA DESCRIPTIVA (joaquin)
 resultados_descriptivos = estadistica_descriptiva(df)
 
-# RELACIÓN ENTRE VARIABLES (nadie aun)
+# RELACIÓN ENTRE VARIABLES
+def relacion_entre_variables(df: pd.DataFrame) -> dict:
+  """Calcula correlaciones entre variables numericas y cruces entre variables
+
+  categoricas y numericas, exportando los resultados.
+  """
+  print("--- Iniciando análisis de relación entre variables ---")
+  resultados_relaciones = {}
+
+  # 1. Variables numéricas de interés (excluyendo IDs)
+  cols_numericas = [
+      "age",
+      "months_inactive",
+      "music_suggestion_rating_1_to_5",
+      "avg_listening_hours_per_week",
+      "playlists_created",
+      "avg_skips_per_day",
+  ]
+
+  # 2. Matriz de correlación de Pearson
+  # Mide el grado de asociación lineal entre pares de variables continuas [-1, 1]
+  matriz_corr = df[cols_numericas].corr(method="pearson").round(4)
+  print("\nMatriz de correlación lineal (Pearson):")
+  print(matriz_corr)
+
+  # Guardar matriz
+  ruta_corr = DIR_RESULTADOS_TABLAS / "matriz_correlacion.csv"
+  matriz_corr.to_csv(ruta_corr)
+  resultados_relaciones["matriz_correlacion"] = matriz_corr
+
+  # 3. Comparación bivariada: Horas de escucha según tipo de suscripción
+  # Agregamos media, mediana y desviación estándar
+  comparacion_plan_horas = (
+      df.groupby("subscription_type")["avg_listening_hours_per_week"]
+      .agg(
+          n_usuarios="count",
+          media_horas="mean",
+          mediana_horas="median",
+          desv_horas="std",
+      )
+      .reset_index()
+      .round(2)
+  )
+
+  print("\nHoras semanales promedio según tipo de suscripción:")
+  print(comparacion_plan_horas.to_string(index=False))
+
+  ruta_plan_horas = DIR_RESULTADOS_TABLAS / "relacion_plan_vs_horas.csv"
+  comparacion_plan_horas.to_csv(ruta_plan_horas, index=False)
+  resultados_relaciones["plan_vs_horas"] = comparacion_plan_horas
+
+  # 4. Comparación bivariada: Skips diarios según interacción con anuncios
+  comparacion_ad_skips = (
+      df.groupby("ad_interaction")["avg_skips_per_day"]
+      .agg(
+          n_usuarios="count",
+          media_skips="mean",
+          mediana_skips="median",
+          desv_skips="std",
+      )
+      .reset_index()
+      .round(2)
+  )
+
+  ruta_ad_skips = DIR_RESULTADOS_TABLAS / "relacion_anuncios_vs_skips.csv"
+  comparacion_ad_skips.to_csv(ruta_ad_skips, index=False)
+  resultados_relaciones["anuncios_vs_skips"] = comparacion_ad_skips
+
+  print("----------------------------------------------------\n")
+  return resultados_relaciones
 
 
 # VISUALIZACIÓN DE DATOS (claudio)
 
 
-# EXPORTACIÓN (nadie aun)
+# EXPORTACIÓN
+DIR_DATOS = BASE_DIR / "datos"
+DIR_DATOS.mkdir(parents=True, exist_ok=True)
 
 
-# REPRODUCIBILIDAD (nadie aun)
+def exportar_dataset_procesado(
+    df: pd.DataFrame, nombre_archivo: str = "spotify_procesado.csv"
+) -> Path:
+  """Exporta el dataset tras las etapas de depuración y preparación a la carpeta datos/."""
+  ruta_salida = DIR_DATOS / nombre_archivo
+  df.to_csv(ruta_salida, index=False)
+  print(
+      f"Dataset procesado exportado exitosamente en: {ruta_salida} con {len(df)}"
+      " registros."
+  )
+  return ruta_salida
+
+
+# REPRODUCIBILIDAD Y PIPELINE PRINCIPAL
+import numpy as np
+
+
+def main():
+  # Fijar semilla aleatoria para garantizar reproducibilidad en cualquier muestreo
+  np.random.seed(42)
+
+  print("==================================================")
+  print("EJECUCIÓN DEL PIPELINE EDA: SPOTIFY USER BEHAVIOR")
+  print("==================================================\n")
+
+  # 1. Carga e inspección
+  df = cargar_e_inspeccionar_datos(CSV_PATH)
+
+  # 2. Diagnóstico de calidad
+  _ = diagnostico_calidad(df)
+
+  # 3. Limpieza y preparación (si Fernando implementa una función limpiar_datos, úsala aquí)
+  # df_limpio = limpiar_datos(df)
+  df_limpio = df.copy()
+
+  # 4. Estadística descriptiva
+  _ = estadistica_descriptiva(df_limpio)
+
+  # 5. Relación entre variables
+  _ = relacion_entre_variables(df_limpio)
+
+  # 6. Visualización de datos (Claudio llamará aquí sus funciones de gráficos)
+
+  # 7. Exportación del dataset procesado
+  exportar_dataset_procesado(df_limpio)
+
+  print("\nPipeline finalizado con éxito sin intervención manual.")
+
+
+if __name__ == "__main__":
+  main()
