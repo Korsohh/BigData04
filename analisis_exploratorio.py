@@ -227,9 +227,6 @@ def estadistica_descriptiva(datos: pd.DataFrame) -> dict:
   print("---------------------------------------------\n")
   return resultados
 
-# Carga inicial del dataframe
-df = cargar_e_inspeccionar_datos(CSV_PATH)
-
 #==============DIAGNÓSTICO_DE_CALIDAD==============#
 
 # Variable que setea el formato de la id
@@ -607,14 +604,10 @@ def diagnostico_calidad(df: pd.DataFrame) -> dict:
       "consistencia": t_consistencia,
       "resumen": resumen,}
 
-resultados_calidad = diagnostico_calidad(df)
-
-
 # LIMPIEZA Y PREPARACIÓN (fernando)
 
 
 # ESTADÍSTICA DESCRIPTIVA (joaquin)
-resultados_descriptivos = estadistica_descriptiva(df)
 
 # RELACIÓN ENTRE VARIABLES
 def relacion_entre_variables(df: pd.DataFrame) -> dict:
