@@ -610,11 +610,102 @@ def diagnostico_calidad(df: pd.DataFrame) -> dict:
 resultados_calidad = diagnostico_calidad(df)
 
 
-# LIMPIEZA Y PREPARACIÓN (fernando)
+# LIMPIEZA Y PREPARACIÓN
 
+# Armado de Rutas
+DIR_DATOS_PROCESADOS = BASE_DIR / "datos" / "procesados"
+DIR_DATOS_PROCESADOS.mkdir(parents=True, exist_ok=True)
+
+# Asignación de Variables Importantes
+COLUMNAS_CLAVE = [COL_ID, "signup_date", "subscription_type", "age", "avg_listening_hours_per_week"]
+COLUMNAS_EXTREMOS = ["avg_listening_hours_per_week", "playlists_created", "avg_skips_per_day", "months_inactive"]
+
+
+def limpiar_y_preparar(df_original: pd.DataFrame) -> pd.DataFrame: 
+  print("--- Iniciando limpieza y preparacion ---")
+  df = df_original.copy() # Trabaja sobre una copia
+  log = []
+  n0 = len(df)
+  log.append(("0. Entrada", "Datos recibidos", n0, n0, 0, "Minimo de 50.000 validado antes de limpiar."))
+
+  # Ordena Texto
+  placeholders = 0
+  for col in df.columns:
+    if pd.api.types.is_string_dtype(df[col]):
+      df[col] = df[col].str.strip()
+      es_placeholder = df[col].str.lower().isin(PLACEHOLDERS)
+      placeholders += int(es_placeholder.sum())
+      df[col] = df[col].mask(es_placeholder)
+  # Convierte la Fecha    
+  nulos_fecha = df["signup_date"].isna().sum()
+  df["signup_date"] = pd.to_datetime(df["signup_date"], errors="coerce")
+  fechas_invalidas = int(df["signup_date"].isna().sum() - nulos_fecha)
+  log.append(("1. Tipos", "Quitar espacios, placeholders a nulo y signup_date a fecha", n0, n0, placeholders + fechas_invalidas, "Placeholders y fechas no convertibles quedan nulos y se tratan en el paso 3."))
+
+  # Elimina Duplicados
+  antes = len(df)
+  df = df.drop_duplicates()
+  repetidos = int(df[COL_ID].duplicated().sum())
+  log.append(("2. Duplicados", "Eliminar filas identicas", antes, len(df), antes - len(df), f"{COL_ID} repetido con datos distintos: {repetidos} (se conservan)."))
+
+  # Elimina Valores Nulos
+  antes = len(df)
+  df = df.dropna(subset=COLUMNAS_CLAVE)
+  log.append(("3. Nulos", "Eliminar filas con nulo en columna clave", antes, len(df), antes - len(df), "Sin esas columnas la fila no sirve para el analisis."))
+
+  # Elimina Filas con Valores Imposibles
+  for col, (minimo, maximo) in RANGOS_VALIDOS.items():
+    antes = len(df)
+    df = df[~((df[col] < minimo) | (df[col] > maximo))]
+    log.append(("4. Rangos", f"Eliminar {col} fuera de [{minimo}, {maximo}]", antes, len(df), antes - len(df), "Valor imposible o implausible."))
+  for col, validos in VALORES_BINARIOS_VALIDOS.items():
+    antes = len(df)
+    df = df[df[col].isna() | df[col].isin(validos)]
+    log.append(("4. Rangos", f"Eliminar {col} fuera de {sorted(validos)}", antes, len(df), antes - len(df), "Categoria no permitida."))
+
+  # Coherencia de Columnas
+  df = df.copy()
+  flag = (df["months_inactive"] >= 3).astype(int)
+  log.append(("5. Coherencia", "Recalcular inactive_3_months_flag", len(df), len(df), int((df["inactive_3_months_flag"] != flag).sum()), "Se deriva de months_inactive, la medida mas detallada."))
+  df["inactive_3_months_flag"] = flag
+
+  df["alerta_activo_con_inactividad"] = (df["subscription_status"] == "Active") & (df["months_inactive"] >= 3)
+  log.append(("5. Coherencia", "Marcar 'Active' con months_inactive >= 3", len(df), len(df), int(df["alerta_activo_con_inactividad"].sum()), "Puede seguir pagando sin escuchar: se conserva con advertencia."))
+
+  # Detección de Valores Extremos
+  tabla_extremos = []
+  for col in COLUMNAS_EXTREMOS:
+    q1, q3 = df[col].quantile([0.25, 0.75])
+    lim_inf, lim_sup = q1 - 1.5 * (q3 - q1), q3 + 1.5 * (q3 - q1)
+    df[f"extremo_{col}"] = (df[col] < lim_inf) | (df[col] > lim_sup)
+    k = int(df[f"extremo_{col}"].sum())
+    tabla_extremos.append({"variable": col, "limite_inferior": lim_inf, "limite_superior": lim_sup, "n_extremos": k, "porcentaje": round(k / len(df) * 100, 2)})
+    log.append(("6. Extremos", f"Marcar extremos IQR en {col}", len(df), len(df), k, "Observaciones plausibles: se conservan y se marcan."))
+  pd.DataFrame(tabla_extremos).to_csv(DIR_RESULTADOS_TABLAS / "extremos_iqr.csv", index=False)
+
+  # Variables Derivadas de Existentes
+  fecha_ref = df["signup_date"].max()
+  df["anio_registro"] = df["signup_date"].dt.year
+  df["antiguedad_meses"] = ((fecha_ref - df["signup_date"]).dt.days / 30.44).round(1)
+  df["grupo_edad"] = pd.cut(df["age"], bins=[0, 24, 34, 44, 54, 200], labels=["Hasta 24", "25-34", "35-44", "45-54", "55 o mas"]).astype(str)
+  df["grupo_plan"] = df["subscription_type"].map({"Free": "Gratuito", "Student": "Estudiante", "Premium Duo": "Premium", "Premium Family": "Premium", "Premium Individual": "Premium"}).fillna("Otro")
+  log.append(("7. Derivadas", "Crear anio_registro, antiguedad_meses, grupo_edad, grupo_plan", len(df), len(df), len(df), f"Antiguedad medida hasta {fecha_ref.date()} (ultimo registro)."))
+
+  # Exportación
+  registro = pd.DataFrame(log, columns=["paso", "accion", "filas_antes", "filas_despues", "filas_afectadas", "justificacion"])
+  registro.to_csv(DIR_RESULTADOS_TABLAS / "registro_limpieza.csv", index=False)
+  df.to_csv(DIR_DATOS_PROCESADOS / "spotify_procesado.csv", index=False)
+
+  print(registro.drop(columns="justificacion").to_string(index=False))
+  print(f"\nRegistros de entrada: {n0} | Registros finales: {len(df)}")
+  print("---------------------------------------------\n")
+  return df
+
+
+df_limpio = limpiar_y_preparar(df)
 
 # ESTADÍSTICA DESCRIPTIVA (joaquin)
-resultados_descriptivos = estadistica_descriptiva(df)
+resultados_descriptivos = estadistica_descriptiva(df_limpio)
 
 # RELACIÓN ENTRE VARIABLES (nadie aun)
 
