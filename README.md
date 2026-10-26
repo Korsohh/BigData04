@@ -159,9 +159,9 @@ Este proyecto está diseñado para ejecutarse de manera reproducible en cualquie
 ## Autor
 
 Proyecto desarrollado por:
--Benjamin Diaz
--Benjamin Juanillo
--Javier Martinez
--Fernando Miranda
--Joaquin Orellana
--Claudio Osses.
+-Benjamin Diaz,
+Benjamin Juanillo,
+Javier Martinez, 
+Fernando Miranda, 
+Joaquin Orellana, 
+Claudio Osses.
